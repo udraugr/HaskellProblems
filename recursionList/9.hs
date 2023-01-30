@@ -1,11 +1,11 @@
 pack :: [Char] -> [String]
 pack [] = [[]]
 pack [x] = [[x]]
-pack str = 
-    let result = pack . tail $ str
+pack (h:str) = 
+    let result = pack str
     in case result of
-        var | var !! 0 !! 0 == (head str) -> ((head str : result !! 0) : (tail result))
-            | otherwise                   -> (head str : "") : result
+        var | var !! 0 !! 0 == h -> ((h : result !! 0) : (tail result))
+            | otherwise                   -> (h : "") : result
 
 
 main :: IO ()
