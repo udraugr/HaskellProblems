@@ -1,11 +1,11 @@
 getAllCycles :: Int -> Int -> [(Int, Int)] -> [[Int]]
 getAllCycles finish pos [] = []
-getAllCycles finish pos mas = [ pos : (findCicles !! j) | i <- [0 .. length(mas) - 1],
+getAllCycles finish pos mas = [ pos : j | i <- [0 .. length(mas) - 1],
     let x = fst(mas !! i),
     let y = snd(mas !! i),
     let findCicles = [[y]] ++ getAllCycles finish y (fst(splitAt i mas) ++ snd(splitAt (i + 1) mas)),
-    j <- [0 .. length(findCicles) - 1],
-    x == pos && ((pos /= finish && y == finish) || not (null $ findCicles !! j) && (last (findCicles !! j) == finish))]
+    j <- findCicles,
+    x == pos && ((pos /= finish && y == finish) || not (null j) && (last (j) == finish))]
 
 
 myCycle :: Int -> [(Int, Int)] -> [[Int]]
